@@ -1,0 +1,18 @@
+.svg-container {
+    position: relative;
+}
+
+.svg-container #moon{
+    z-index: 0;
+    position: relative;
+}
+
+.svg-container #sky{
+    z-index: -1;
+    position: relative;
+}
+
+.svg-container #clouds{
+    position: relative;
+    z-index: 1;
+}

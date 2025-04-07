@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/layouts.css";
+@import "../styles/scene.css";
 
 :root {
   --background: #171717;
