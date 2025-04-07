@@ -1,18 +1,26 @@
+.scene {
+    position: relative;
+}
+
 .svg-container {
     position: relative;
-}
-
-.svg-container #moon{
     z-index: 0;
-    position: relative;
 }
 
-.svg-container #sky{
-    z-index: -1;
-    position: relative;
+@font-face {
+    font-family: "Boiling";
+    src: url("/fonts/Boiling-BlackDemo.ttf") format("truetype");
 }
 
-.svg-container #clouds{
-    position: relative;
+.scene h1.main-title {
+    position: absolute;
+    top: 60%;
+    left: 70%;
     z-index: 1;
+    color: white;
+    font-family: "Boiling", sans-serif;
+    text-transform: capitalize;
+    font-size: 100px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    line-height: 0.5;
 }
