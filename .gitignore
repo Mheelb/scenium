@@ -1,0 +1,20 @@
+# Node.js
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-error.log*
+
+# Next.js
+.next/
+out/
+.cache/
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+
+.env
