@@ -1,0 +1,58 @@
+.scene {
+    overflow: hidden;
+}
+
+.svg-container {
+    position: relative;
+}
+
+@font-face {
+    font-family: "Boiling";
+    src: url("/fonts/Boiling-BlackDemo.ttf") format("truetype");
+}
+
+.scene h1.main-title {
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    z-index: 1;
+    color: white;
+    font-family: "Boiling", sans-serif;
+    text-transform: capitalize;
+    font-size: 100px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    line-height: 0.5;
+    opacity: 0;
+}
+
+.scene p.description {
+    position: absolute;
+    top: 75%;
+    left: 70%;
+    z-index: 1;
+    color: white;
+    font-family: "Boiling", sans-serif;
+    font-size: 17px;
+    width: 25%;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+}
+
+.word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+.scroll-icon {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translateX(-50%);
+    animation: bounce 1s infinite;
+    opacity: 0;
+}
+
+.scroll-icon.no-bounce {
+    animation: none;
+}

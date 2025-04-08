@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/layouts.css";
+@import "../styles/scene.css";
 
 :root {
   --background: #171717;
@@ -32,4 +33,12 @@ body {
   color: var(--foreground);
   font-family: "Degular", sans-serif;
   font-size: 16px;
+}
+
+h1.main-title {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 24px;
 }
