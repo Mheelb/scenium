@@ -20,7 +20,25 @@ header .logo {
     filter: invert(100%);
 }
 
-header ul li :hover {
-    cursor: pointer;
-    border-bottom: 2px solid var(--foreground);
-}
+header ul li a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    padding-bottom: 0.25em;
+  }
+  
+  header ul li a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--foreground);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  header ul li a:hover::after {
+    width: 100%;
+  }
