@@ -1,0 +1,13 @@
+.button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transition fluide pour les changements */
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Légèrement plus lumineux */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); /* Effet de brillance */
+    border-color: rgba(255, 255, 255, 0.8); /* Accentue la bordure */
+}
