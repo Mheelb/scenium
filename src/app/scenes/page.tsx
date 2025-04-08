@@ -1,12 +1,26 @@
 "use client";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { RiArrowDownDoubleFill } from "react-icons/ri";
+
 
 export default function Scene() {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+  const descriptionText =
+    "Un ciel texturé, des nuages teintés de rose et d’orange, une lumière qui transforme chaque photo en un moment suspendu. Sunset Dream, c’est la scène parfaite entre douceur et intensité, comme un coucher de soleil que tu ne veux pas voir disparaître.";
+
+  const splitText = (text: string) => {
+    return text.split(" ").map((word, index) => (
+      <span key={index} className="word">
+        {word}&nbsp;
+      </span>
+    ));
+  };
 
   const moonAnimation = () => {
     const tl = gsap.timeline();
@@ -37,48 +51,79 @@ export default function Scene() {
   };
 
   const titleAnimation = () => {
-    const tl = gsap.timeline();
-    tl.from(".main-title", {
-      y: 100,
+    gsap.fromTo('.main-title', {
       opacity: 0,
+      y: 100,
+    }, {
+      opacity: 1,
+      y: 0,
       duration: 1,
       ease: "power2.out",
-    }, 1);
+      delay: 1,
+    }
+    );
   };
 
-  const titleAnimationOnScroll = () => {
+  const scrollIconAnimation = () => {
+    gsap.fromTo(
+      ".scroll-icon",
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        ease: "power2.out",
+        delay: 1,
+      }
+    );
+  };
+
+  const descriptionAnimation = () => {
+    scrollIconAnimation();
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".scene",
         start: "top top",
-        end: "bottom top",
+        end: "+=500",
         scrub: 1,
-      },
+        pin: true
+      }
+    })
+    tl.set(".scroll-icon", {
+      onStart: () => document.querySelector(".scroll-icon")?.classList.add("no-bounce"),
     });
-    tl.to(".main-title", {
-      y: -100,
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    });
+    tl.to(".scroll-icon", { opacity: 0, duration: 1, ease: "power2.out" }, 0);
+    tl.fromTo(
+        ".word",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, 0)
   };
 
   useEffect(() => {
-    titleAnimation();
-    titleAnimationOnScroll();
+    descriptionAnimation();
   }, []);
 
   return (
-      <div className="scene" style={{ overflow: "hidden" }}>
-        <ReactSVG
-          src="/cloud-scene.svg"
-          className="svg-container"
-          afterInjection={() => {
-            moonAnimation();
-            cloudAnimation();
-          }}
-        />
-        <h1 className="main-title">sunset dream</h1>
-      </div>
+    <div className="scene">
+      <ReactSVG
+        src="/cloud-scene.svg"
+        className="svg-container"
+        afterInjection={() => {
+          moonAnimation();
+          cloudAnimation();
+          titleAnimation();
+          ScrollTrigger.refresh();
+        }}
+      />
+      <h1 className="main-title">sunset dream</h1>
+      <p className="description">{splitText(descriptionText)}</p>
+      <RiArrowDownDoubleFill size={50} className="scroll-icon" />
+    </div>
   );
 }

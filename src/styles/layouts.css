@@ -1,5 +1,5 @@
 header {
-    position: absolute;
+    position: fixed;
     color: var(--foreground);
     z-index: 1;
     width: 100%;

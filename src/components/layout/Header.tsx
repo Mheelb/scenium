@@ -1,4 +1,4 @@
-"use client";``
+"use client";
 import { useRouter } from "next/navigation";
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
             <nav>
                 <ul className="flex space-x-10">
                     <li>
-                        <a onClick={() => router.push('/scenes')}>Nos scènes</a>
+                        <a href="/scenes">Nos scènes</a>
                     </li>
                     <li>
                         <a onClick={() => router.push('/about')}>À propos</a>
