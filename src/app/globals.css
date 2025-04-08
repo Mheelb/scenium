@@ -33,6 +33,11 @@ body {
   color: var(--foreground);
   font-family: "Degular", sans-serif;
   font-size: 16px;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 h1.main-title {
