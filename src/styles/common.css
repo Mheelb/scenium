@@ -1,13 +1,11 @@
-.button {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgb(255, 255, 255);
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.scene-button {
+    opacity: 0;
 }
 
-.button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6); 
-    border-color: rgba(255, 255, 255, 0.8);
+.button-glow {
+    transition: all 0.3s ease-in-out;
+  }
+  
+.button-glow:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
 }
