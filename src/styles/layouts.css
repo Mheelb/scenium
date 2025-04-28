@@ -1,7 +1,7 @@
 header {
     position: fixed;
     color: var(--foreground);
-    z-index: 1;
+    z-index: 10;
     width: 100%;
 }
 
@@ -16,12 +16,66 @@ header::before {
     opacity: 0.4;
     z-index: -1;
 }
+
 header .logo {
     width: 15em;
     filter: invert(100%);
+    cursor: pointer;
 }
 
-header ul li :hover {
+header ul li a {
+    transition: border-bottom 0.3s ease;
+    padding-bottom: 2px;
+}
+
+header ul li a:hover {
     cursor: pointer;
     border-bottom: 2px solid var(--foreground);
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background);
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu-overlay.fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.mobile-menu-overlay.fade-out {
+    animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    header .logo {
+        width: 8em;
+    }
+    
+    .mobile-menu-overlay ul li a {
+        font-size: 1.5rem;
+        display: block;
+        padding: 0.5rem 0;
+    }
 }
