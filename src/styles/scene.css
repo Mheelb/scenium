@@ -60,7 +60,7 @@
 @media (max-width: 480px) {
     .scene h1.main-title {
         font-size: 40px;
-        top: 43%;
+        top: 15%;
     }
 }
 
@@ -88,7 +88,7 @@
 @media (max-width: 480px) {
     .scene p.description {
         width: 90%;
-        top: 48%;
+        top: 20%;
         font-size: 14px;
     }
 }
