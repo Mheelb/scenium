@@ -23,17 +23,13 @@ export default function Header() {
         };
     }, []);
     
-    // Gestion du toggle avec animation
     const toggleMenu = () => {
         if (isMenuOpen) {
-            // Commencer l'animation de fade out
             setMenuVisible(false);
-            // Attendre la fin de l'animation avant de fermer le menu
             setTimeout(() => {
                 setIsMenuOpen(false);
-            }, 300); // Durée correspondant à l'animation CSS
+            }, 300);
         } else {
-            // Ouvrir le menu et le rendre visible immédiatement
             setIsMenuOpen(true);
             setMenuVisible(true);
         }
