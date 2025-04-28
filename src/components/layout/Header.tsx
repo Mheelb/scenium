@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default function Header() {
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [menuVisible, setMenuVisible] = useState(false); // État séparé pour l'animation
+    const [menuVisible, setMenuVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     
     useEffect(() => {
@@ -36,11 +36,11 @@ export default function Header() {
     
     return (
         <header className="p-4">
-            <div className="flex items-center justify-between">
+            <div className={`flex items-center ${isMobile ? 'justify-between mr-5' : ''}`}>
                 <img 
                     src="/logo.svg" 
                     alt="logo scenium" 
-                    className={`logo ${isMobile ? 'w-32' : 'ml-15'}`} 
+                    className={`logo ${isMobile ? 'w-32' : 'ml-5'}`} 
                     onClick={() => router.push('/')}
                 />
                 
