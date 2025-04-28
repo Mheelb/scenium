@@ -11,6 +11,7 @@ export default function Scene() {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
   const sceneRef = useRef<HTMLDivElement>(null);
   const svgContainerRef = useRef<HTMLDivElement>(null);
+  const mainContainerRef = useRef<HTMLElement>(null);
   
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
@@ -89,13 +90,12 @@ export default function Scene() {
     let mm = gsap.matchMedia();
     mm.add({
       isMobile: "(max-width: 768px)",
-      isDesktop: "(min-width: 769px)",
     }, (context) => {
-      const { isMobile, isDesktop } = context.conditions as { isMobile: boolean, isDesktop: boolean };
+      const { isMobile } = context.conditions as { isMobile: boolean };
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: ".scene",
+          trigger: sceneRef.current,
           start: "top top",
           end: isMobile ? `+=300` : `+=600`,
           scrub: 1,
@@ -121,7 +121,12 @@ export default function Scene() {
           stagger: 0.1,
           ease: "power2.out",
         }, 0);
-    })
+        
+      return () => {
+      };
+    });
+    
+    return mm;
   };
 
   useEffect(() => {
@@ -146,9 +151,15 @@ export default function Scene() {
     
     const ctx = gsap.context(() => {
       setTimeout(() => {
-        descriptionAnimation();
-      }, 200);
-    }, sceneRef);
+        const mm = descriptionAnimation();
+        
+        return () => {
+          if (mm && mm.revert) {
+            mm.revert();
+          }
+        };
+      }, 500);
+    }, mainContainerRef);
 
     const resizeObserver = new ResizeObserver(entries => {
       if (svgContainerRef.current) {
@@ -176,33 +187,35 @@ export default function Scene() {
   }, [windowSize]);
 
   return (
-    <div className="scene h-screen w-full relative" ref={sceneRef}>
-      <div className="svg-wrapper h-full w-full absolute inset-0" ref={svgContainerRef}>
-        <ReactSVG
-          src="/cloud-scene.svg"
-          className="svg-container h-full w-full"
-          beforeInjection={(svg) => {
-            svg.setAttribute('width', '100%');
-            svg.setAttribute('height', '100%');
-            svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-            svg.style.width = '100%';
-            svg.style.height = '100%';
-            svg.style.position = 'absolute';
-          }}
-          afterInjection={() => {
-            moonAnimation();
-            cloudAnimation();
-            titleAnimation();
-            ScrollTrigger.refresh();
-          }}
+    <main ref={mainContainerRef} className="scene-container">
+      <div className="scene h-screen w-full relative" ref={sceneRef}>
+        <div className="svg-wrapper h-full w-full absolute inset-0" ref={svgContainerRef}>
+          <ReactSVG
+            src="/cloud-scene.svg"
+            className="svg-container h-full w-full"
+            beforeInjection={(svg) => {
+              svg.setAttribute('width', '100%');
+              svg.setAttribute('height', '100%');
+              svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+              svg.style.width = '100%';
+              svg.style.height = '100%';
+              svg.style.position = 'absolute';
+            }}
+            afterInjection={() => {
+              moonAnimation();
+              cloudAnimation();
+              titleAnimation();
+              ScrollTrigger.refresh();
+            }}
+          />
+        </div>
+        <h1 className="main-title">sunset dream</h1>
+        <p className="description">{splitText(descriptionText)}</p>
+        <RiArrowDownDoubleFill 
+          size={windowSize.width <= 480 ? 30 : windowSize.width <= 768 ? 40 : 50} 
+          className="scroll-icon" 
         />
       </div>
-      <h1 className="main-title">sunset dream</h1>
-      <p className="description">{splitText(descriptionText)}</p>
-      <RiArrowDownDoubleFill 
-        size={windowSize.width <= 480 ? 30 : windowSize.width <= 768 ? 40 : 50} 
-        className="scroll-icon" 
-      />
-    </div>
+    </main>
   );
 }
