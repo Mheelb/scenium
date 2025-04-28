@@ -24,13 +24,25 @@ header .logo {
 }
 
 header ul li a {
-    transition: border-bottom 0.3s ease;
+    position: relative;
     padding-bottom: 2px;
+    text-decoration: none;
 }
 
-header ul li a:hover {
-    cursor: pointer;
-    border-bottom: 2px solid var(--foreground);
+header ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--foreground);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+header ul li a:hover::after {
+    width: 100%;
 }
 
 .mobile-menu-overlay {
@@ -106,5 +118,9 @@ header ul li a:hover {
         font-size: 1.5rem;
         display: block;
         padding: 0.5rem 0;
+    }
+    
+    .mobile-menu-overlay ul li a::after {
+        bottom: -5px;
     }
 }
