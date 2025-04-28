@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default function Header() {
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [menuVisible, setMenuVisible] = useState(false); // État séparé pour l'animation
+    const [menuVisible, setMenuVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     
     useEffect(() => {
