@@ -100,9 +100,6 @@
 }
 
 .scroll-icon {
-    position: absolute;
-    bottom: 10%;
-    left: 49%;
     transform: translateX(-50%);
     animation: bounce 1s infinite;
     opacity: 0;

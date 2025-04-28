@@ -1,24 +1,24 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react"; // Retire useState
 import { ReactSVG } from "react-svg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { RiArrowDownDoubleFill } from "react-icons/ri";
+import Button from "@/components/common/Button";
+import { useDevice } from "@/contexts/DeviceProvider";
 
 export default function Scene() {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+  const { isMobile, isTablet, isDesktop, windowSize } = useDevice();
   
   const sceneRef = useRef<HTMLDivElement>(null);
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const mainContainerRef = useRef<HTMLElement>(null);
   const animationInitializedRef = useRef(false);
-  
-  const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0
-  });
+  const animationsRef = useRef<gsap.core.Tween[]>([]);
 
   const descriptionText =
     "Un ciel texturé, des nuages teintés de rose et d'orange, une lumière qui transforme chaque photo en un moment suspendu. Sunset Dream, c'est la scène parfaite entre douceur et intensité, comme un coucher de soleil que tu ne veux pas voir disparaître.";
@@ -32,7 +32,9 @@ export default function Scene() {
   }, []);
 
   const moonAnimation = useCallback(() => {
-    return gsap.to("#moon", {
+    gsap.killTweensOf("#moon");
+    
+    const anim = gsap.to("#moon", {
       motionPath: {
         path: [
           { x: 0, y: 0 },
@@ -46,19 +48,15 @@ export default function Scene() {
       ease: "power2.inOut",
       repeat: -1,
     });
-  }, []);
-
-  const cloudAnimation = useCallback(() => {
-    return gsap.from("#clouds", {
-      y: 1000,
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-    });
+    
+    animationsRef.current.push(anim);
+    return anim;
   }, []);
 
   const titleAnimation = useCallback(() => {
-    return gsap.fromTo('.main-title', {
+    gsap.killTweensOf(".main-title");
+    
+    const anim = gsap.fromTo('.main-title', {
       opacity: 0,
       y: 100,
     }, {
@@ -68,14 +66,12 @@ export default function Scene() {
       ease: "power2.out",
       delay: 1,
     });
+    
+    animationsRef.current.push(anim);
+    return anim;
   }, []);
 
   const handleResize = useCallback(() => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
-    
     if (animationInitializedRef.current) {
       ScrollTrigger.refresh();
     }
@@ -101,8 +97,10 @@ export default function Scene() {
           onUpdate: (self) => {
             if (self.progress > 0.1) {
               gsap.to(".scroll-icon", { opacity: 0, duration: 0.3 });
+              gsap.to(".scene-button", { opacity: 1, duration: 0.3 });
             } else {
               gsap.to(".scroll-icon", { opacity: 1, duration: 0.3 });
+              gsap.to(".scene-button", { opacity: 0, duration: 0.3 });
             }
           }
         }
@@ -135,17 +133,17 @@ export default function Scene() {
   }, []);
 
   useEffect(() => {
-    const debouncedResizeHandler = debounce(handleResize, 250);
-    
-    window.addEventListener('resize', debouncedResizeHandler);
+    window.addEventListener('resize', handleResize);
     
     return () => {
-      window.removeEventListener('resize', debouncedResizeHandler);
+      window.removeEventListener('resize', handleResize);
     };
   }, [handleResize]);
 
   useEffect(() => {
     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    animationsRef.current.forEach(anim => anim.kill());
+    animationsRef.current = [];
     
     const ctx = gsap.context(() => {
       if (!animationInitializedRef.current) {
@@ -185,11 +183,12 @@ export default function Scene() {
       }
       
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      animationsRef.current.forEach(anim => anim.kill());
       gsap.killTweensOf("*");
     };
-  }, [windowSize, setupScrollAnimation, setupSvg]);
+  }, [windowSize?.width, windowSize?.height, setupScrollAnimation, setupSvg]);
 
-  const scrollIconSize = windowSize.width <= 480 ? 30 : (windowSize.width <= 768 ? 40 : 50);
+  const scrollIconSize = isMobile ? 30 : (isTablet ? 40 : 50);
 
   return (
     <main ref={mainContainerRef} className="scene-container">
@@ -199,33 +198,41 @@ export default function Scene() {
             src="/cloud-scene.svg"
             className="svg-container h-full w-full"
             beforeInjection={setupSvg}
-            afterInjection={() => {
-              moonAnimation();
-              cloudAnimation();
-              titleAnimation();
-              ScrollTrigger.refresh();
+            afterInjection={(svg) => {
+              setTimeout(() => {
+                moonAnimation();
+                const clouds = svg.querySelectorAll('#clouds');
+                if (clouds.length > 0) {
+                  gsap.from(clouds, {
+                    y: 500,
+                    opacity: 0,
+                    duration: 2,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                  });
+                }
+                titleAnimation();
+                ScrollTrigger.refresh();
+              }, 100);
             }}
           />
         </div>
         <h1 className="main-title">sunset dream</h1>
         <p className="description">{splitText(descriptionText)}</p>
-        <RiArrowDownDoubleFill 
-          size={scrollIconSize} 
-          className="scroll-icon" 
-        />
+        <div className={`absolute w-full flex ${
+          isMobile ? 'p-4 bottom-20 justify-center' : isTablet ? 'p-8 bottom-8' : 'justify-end p-12 bottom-20 right-40'
+        }`}>
+          <Button size="large" className="scene-button">
+            Réserver
+          </Button>
+        </div>
+        <div className="absolute w-full flex justify-center bottom-10">
+          <RiArrowDownDoubleFill 
+            size={scrollIconSize} 
+            className="scroll-icon" 
+          />
+        </div>
       </div>
     </main>
   );
-}
-
-function debounce(func: Function, wait: number) {
-  let timeout: NodeJS.Timeout;
-  return function executedFunction(...args: any[]) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
