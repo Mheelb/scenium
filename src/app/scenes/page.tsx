@@ -70,22 +70,7 @@ export default function Scene() {
     });
   };
 
-  const scrollIconAnimation = () => {
-    gsap.fromTo(
-      ".scroll-icon",
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 2,
-        ease: "power2.out",
-        delay: 1,
-      }
-    );
-  };
-
   const descriptionAnimation = () => {
-    scrollIconAnimation();
 
     let mm = gsap.matchMedia();
     mm.add({
