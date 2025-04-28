@@ -1,23 +1,112 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 
 export default function Header() {
     const router = useRouter();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(false); // État séparé pour l'animation
+    const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        
+        checkIfMobile();
+        
+        window.addEventListener('resize', checkIfMobile);
+        
+        return () => {
+            window.removeEventListener('resize', checkIfMobile);
+        };
+    }, []);
+    
+    // Gestion du toggle avec animation
+    const toggleMenu = () => {
+        if (isMenuOpen) {
+            // Commencer l'animation de fade out
+            setMenuVisible(false);
+            // Attendre la fin de l'animation avant de fermer le menu
+            setTimeout(() => {
+                setIsMenuOpen(false);
+            }, 300); // Durée correspondant à l'animation CSS
+        } else {
+            // Ouvrir le menu et le rendre visible immédiatement
+            setIsMenuOpen(true);
+            setMenuVisible(true);
+        }
+    };
+    
     return (
-        <header>
-            <div className="flex items-center space-x-15">
-            <img src="/logo.svg" alt="logo scenium" className="logo ml-15" onClick={() => router.push('/')}/>
-            <nav>
-                <ul className="flex space-x-10">
-                    <li>
-                        <a href="/scenes">Nos scènes</a>
-                    </li>
-                    <li>
-                        <a onClick={() => router.push('/about')}>À propos</a>
-                    </li>
-                </ul>
-            </nav>
+        <header className="p-4">
+            <div className="flex items-center justify-between">
+                <img 
+                    src="/logo.svg" 
+                    alt="logo scenium" 
+                    className={`logo ${isMobile ? 'w-32' : 'ml-15'}`} 
+                    onClick={() => router.push('/')}
+                />
+                
+                {/* Menu desktop */}
+                {!isMobile && (
+                    <nav className="ml-10">
+                        <ul className="flex space-x-10">
+                            <li>
+                                <a href="/scenes">Nos scènes</a>
+                            </li>
+                            <li>
+                                <a onClick={() => router.push('/about')}>À propos</a>
+                            </li>
+                        </ul>
+                    </nav>
+                )}
+                
+                {/* Bouton de menu mobile */}
+                {isMobile && (
+                    <button 
+                        onClick={toggleMenu} 
+                        className="text-white z-20"
+                        aria-label="Menu"
+                    >
+                        {isMenuOpen ? 
+                            <RiCloseLine size={28} /> : 
+                            <RiMenuLine size={28} />
+                        }
+                    </button>
+                )}
             </div>
-        </header> 
-    )
+            
+            {/* Menu mobile */}
+            {isMobile && isMenuOpen && (
+                <div className={`mobile-menu-overlay ${menuVisible ? 'fade-in' : 'fade-out'}`}>
+                    <nav>
+                        <ul className="flex flex-col items-center space-y-8 py-10">
+                            <li>
+                                <a 
+                                    href="/scenes" 
+                                    onClick={toggleMenu}
+                                    className="text-xl"
+                                >
+                                    Nos scènes
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    onClick={() => {
+                                        router.push('/about');
+                                        toggleMenu();
+                                    }}
+                                    className="text-xl"
+                                >
+                                    À propos
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            )}
+        </header>
+    );
 }
