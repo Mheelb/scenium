@@ -85,37 +85,43 @@ export default function Scene() {
 
   const descriptionAnimation = () => {
     scrollIconAnimation();
-    
-    const scrollDistance = windowSize.width <= 480 ? 300 : windowSize.width <= 768 ? 400 : 500;
-    
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".scene",
-        start: "top top",
-        end: `+=${scrollDistance}`,
-        scrub: 1,
-        pin: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          if (progress > 0.1) {
-            gsap.to(".scroll-icon", { opacity: 0, duration: 0.3 });
-          } else {
-            gsap.to(".scroll-icon", { opacity: 1, duration: 0.3 });
+
+    let mm = gsap.matchMedia();
+    mm.add({
+      isMobile: "(max-width: 768px)",
+      isDesktop: "(min-width: 769px)",
+    }, (context) => {
+      const { isMobile, isDesktop } = context.conditions as { isMobile: boolean, isDesktop: boolean };
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".scene",
+          start: "top top",
+          end: isMobile ? `+=300` : `+=600`,
+          scrub: 1,
+          pin: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            if (progress > 0.1) {
+              gsap.to(".scroll-icon", { opacity: 0, duration: 0.3 });
+            } else {
+              gsap.to(".scroll-icon", { opacity: 1, duration: 0.3 });
+            }
           }
         }
-      }
-    });
-    
-    tl.fromTo(
-      ".word",
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        stagger: 0.1,
-        ease: "power2.out",
-      }, 0);
+      });
+
+      tl.fromTo(
+        ".word",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, 0);
+    })
   };
 
   useEffect(() => {
