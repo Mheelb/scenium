@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 
 export default function Header() {
     const router = useRouter();
@@ -23,17 +22,13 @@ export default function Header() {
         };
     }, []);
     
-    // Gestion du toggle avec animation
     const toggleMenu = () => {
         if (isMenuOpen) {
-            // Commencer l'animation de fade out
             setMenuVisible(false);
-            // Attendre la fin de l'animation avant de fermer le menu
             setTimeout(() => {
                 setIsMenuOpen(false);
-            }, 300); // Durée correspondant à l'animation CSS
+            }, 300);
         } else {
-            // Ouvrir le menu et le rendre visible immédiatement
             setIsMenuOpen(true);
             setMenuVisible(true);
         }
@@ -67,13 +62,14 @@ export default function Header() {
                 {isMobile && (
                     <button 
                         onClick={toggleMenu} 
-                        className="text-white z-20"
+                        className="text-white z-20 relative w-7 h-7 flex items-center justify-center"
                         aria-label="Menu"
                     >
-                        {isMenuOpen ? 
-                            <RiCloseLine size={28} /> : 
-                            <RiMenuLine size={28} />
-                        }
+                        <div className={`menu-icon-container ${isMenuOpen ? 'menu-open' : ''}`}>
+                            <div className="burger-line top-line"></div>
+                            <div className="burger-line middle-line"></div>
+                            <div className="burger-line bottom-line"></div>
+                        </div>
                     </button>
                 )}
             </div>
