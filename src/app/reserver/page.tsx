@@ -57,24 +57,24 @@ export default function Reserver() {
     };
 
     return (
-        <div className="flex flex-col gap-4 items-center h-screen pt-40">
-            {!sent ? (
+        <div className="flex flex-col gap-4 items-center min-h-screen pt-20 md:pt-40 px-4">
+            {sent ? (
                 <>
-                    <h2 className="main-title">ON VOUS RECONTACTE BIENTÔT !</h2>
-                    <div className="w-150 border border-white p-5 bg-white/10 text-white flex items-start gap-6" style={{ minHeight: '150px' }}>
+                    <h2 className="main-title text-center">ON VOUS RECONTACTE BIENTÔT !</h2>
+                    <div className="w-full max-w-[600px] border border-white p-5 bg-white/10 text-white flex items-start gap-6" style={{ minHeight: '150px' }}>
                         <div>
-                            <p className="text-lg font-light mb-1">Merci pour votre demande.<br />Notre équipe revient vers vous dans les plus brefs délais pour discuter des disponibilités et vous proposer un devis.</p>
+                            <p className="text-base md:text-lg font-light mb-1">Merci pour votre demande.<br />Notre équipe revient vers vous dans les plus brefs délais pour discuter des disponibilités et vous proposer un devis.</p>
                             <span>À très vite !</span>
                         </div>
                     </div>
                 </>
             ) : (
-                <h2 className="main-title">Contactes-nous pour réserver ta scène</h2>
+                <h2 className="main-title text-center">Contactes-nous pour réserver ta scène</h2>
             )}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="w-full max-w-[600px]">
                 <div className="flex flex-col gap-1 justify-center items-center mt-5">
                     <Input
-                        className="w-150"
+                        className="w-full"
                         label="Quel type d'évènement organises-tu ?"
                         value={form.type}
                         type="select"
@@ -82,7 +82,7 @@ export default function Reserver() {
                         onChange={e => setForm(f => ({ ...f, type: e.target.value }))}
                     />
                     <Input
-                        className="w-150"
+                        className="w-full"
                         label="Adresse email"
                         value={form.email}
                         type="email"
@@ -90,7 +90,7 @@ export default function Reserver() {
                         onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     />
                     <Input
-                        className="w-150"
+                        className="w-full"
                         label="Numéro de téléphone"
                         value={form.tel}
                         type="tel"
@@ -98,25 +98,25 @@ export default function Reserver() {
                         onChange={e => setForm(f => ({ ...f, tel: e.target.value }))}
                     />
                     <Input
-                        className="w-150"
+                        className="w-full"
                         label="Une demande particulière ?"
                         value={form.demande}
                         type="textarea"
                         onChange={e => setForm(f => ({ ...f, demande: e.target.value }))}
                     />
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center mt-4">
                     <input
                         type="checkbox"
                         className="w-5 h-5 accent-black bg-white border-2 border-white rounded focus:ring-2 focus:ring-black"
                         checked={form.accept}
                         onChange={e => setForm(f => ({ ...f, accept: e.target.checked }))}
                     />
-                    <p className="text-white font-light">J'accepte les conditions d'utilisation et la politique de confidentialité.</p>
+                    <p className="text-white font-light text-sm md:text-base">J'accepte les conditions d'utilisation et la politique de confidentialité.</p>
                 </div>
-                {error && <div className="text-red-500 mt-2">{error}</div>}
+                {error && <div className="text-red-500 mt-2 text-center">{error}</div>}
                 <div className="flex justify-center my-8">
-                    <Button type="submit" size="large" className="w-40" disabled={sending}>
+                    <Button type="submit" size="large" className="w-full md:w-40" disabled={sending}>
                         {sending ? "Envoi..." : "Réserver"}
                     </Button>
                 </div>
