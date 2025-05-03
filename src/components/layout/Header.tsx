@@ -91,6 +91,17 @@ export default function Header() {
                             <li>
                                 <a 
                                     onClick={() => {
+                                        router.push('/reserver');
+                                        toggleMenu();
+                                    }}
+                                    className="text-xl"
+                                >
+                                    Réserver
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    onClick={() => {
                                         router.push('/about');
                                         toggleMenu();
                                     }}
