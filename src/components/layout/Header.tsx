@@ -51,7 +51,7 @@ export default function Header() {
                         <nav className="ml-10">
                             <ul className="flex space-x-10">
                                 <li>
-                                    <a href="/scenes">Nos scènes</a>
+                                    <a onClick={() => router.push('/about')}>Nos scènes</a>
                                 </li>
                                 <li>
                                     <a onClick={() => router.push('/about')}>À propos</a>

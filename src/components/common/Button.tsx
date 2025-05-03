@@ -32,7 +32,7 @@ export default function Button({
   const buttonClasses = `${baseClasses} ${sizeClasses[size]} ${widthClass} ${className}`;
   
   return (
-    <button className={buttonClasses} {...rest}>
+    <button className={buttonClasses + ' cursor-pointer'} {...rest}>
       {children}
     </button>
   );
