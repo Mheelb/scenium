@@ -95,6 +95,9 @@
     .text-card > p{
         max-width: clamp(60ch, 80%, 90ch);
     }
+    .newsletter > div > input{
+        margin: 0;
+    }
 }
 @media (max-width: 750px) {
     .newsletter {

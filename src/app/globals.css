@@ -3,6 +3,7 @@
 @import "../styles/scene.css";
 @import "../styles//common.css";
 @import "../styles/accueil.css";
+@import "../styles/about.css";
 
 :root {
   --background: #171717;
@@ -52,4 +53,8 @@ h2 {
 
 span{
   font-weight: bold;
+}
+
+footer{
+  background: var(--background);
 }

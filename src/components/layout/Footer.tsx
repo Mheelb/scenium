@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white px-[clamp(200px,200px,300px)]">
+    <footer className="text-white px-[clamp(200px,200px,300px)]">
 
       <div className="container mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-8">
 
@@ -15,10 +15,10 @@ export default function Footer() {
           <h3 className="font-bold mb-2">Informations</h3>
           <ul className="space-y-1">
             <li>
-              <Link href="/scenes" className="hover:underline">Nos scènes</Link>
+              <Link href="/scenes">Nos scènes</Link>
             </li>
             <li>
-              <Link href="/a-propos" className="hover:underline">À propos</Link>
+              <Link href="/about">À propos</Link>
             </li>
           </ul>
         </div>
@@ -27,10 +27,10 @@ export default function Footer() {
           <h3 className="font-bold mb-2">Informations pratiques</h3>
           <ul className="space-y-1">
             <li>
-              <Link href="/mentions-legales" className="hover:underline">Informations légales</Link>
+              <Link href="/mentions-legales">Informations légales</Link>
             </li>
             <li>
-              <Link href="/confidentialite" className="hover:underline">Politique de confidentialité</Link>
+              <Link href="/confidentialite">Politique de confidentialité</Link>
             </li>
           </ul>
         </div>
