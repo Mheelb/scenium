@@ -1,8 +1,16 @@
+@font-face {
+    font-family: 'Degular';
+    src: url('/fonts/DegularDisplay-Black.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 header {
     position: fixed;
     color: var(--foreground);
     z-index: 10;
     width: 100%;
+    font-family: "Degular", sans-serif;
 }
 
 header::before {

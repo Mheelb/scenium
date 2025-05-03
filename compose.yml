@@ -5,8 +5,13 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
-      - /app/node_modules
+      - node_modules:/app/node_modules
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
     stdin_open: true
     tty: true
+    command: sh -c "npm install && npm run dev"
+
+volumes:
+  node_modules:

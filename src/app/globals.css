@@ -2,6 +2,7 @@
 @import "../styles/layouts.css";
 @import "../styles/scene.css";
 @import "../styles//common.css";
+@import "../styles/accueil.css";
 
 :root {
   --background: #171717;
@@ -32,7 +33,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Degular", sans-serif;
+  font-family: "Noto sans", sans-serif;
   font-size: 16px;
   -ms-overflow-style: none;
 }
@@ -47,4 +48,8 @@ h1.main-title {
 
 h2 {
   font-size: 24px;
+}
+
+span{
+  font-weight: bold;
 }
