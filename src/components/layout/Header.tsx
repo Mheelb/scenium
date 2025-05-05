@@ -63,7 +63,7 @@ export default function Header() {
                             onClick={() => router.push('/reserver')}
                             className="mr-5"
                         >
-                            Contactes-nous
+                            Contactez-nous
                         </Button>
                     </div>
                 )}

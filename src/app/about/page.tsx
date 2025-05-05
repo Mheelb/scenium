@@ -12,7 +12,7 @@ export default function About() {
           <p className="text-[16px] mt-10">Chez Scenium, nous avons créé quelque chose de différent.Un projet né d’une idée simple : rendre chaque souvenir inoubliable. Nos scènes décoratives ne sont pas là juste pour embellir un lieu. Elles créent un univers où chaque instant devient une histoire à raconter. Parce que certains moments méritent plus qu’un simple souvenir… Bienvenue dans l’univers Scenium.</p>
         </div>
         <div>
-          <Image src="/box1.png" alt="Photobox style nuage rose féerique" width={500} height={500} />
+          <Image src="/about.jpg" alt="Photobox style nuage rose féerique" width={500} height={500} />
         </div>
       </div>
       <Newsletter />

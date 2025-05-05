@@ -41,13 +41,13 @@ export default function Footer() {
       <div className="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between text-sm">
         <p>Copyright © 2025 Scenium. Tous droits réservés.</p>
         <div className="flex space-x-4 mt-4 md:mt-0">
-          <Link href="https://www.tiktok.com" target="_blank" aria-label="TikTok">
-            <Image src="/insta.png" alt="TikTok" width={40} height={40} />
+          <Link href="https://www.instagram.com/scenium._?igsh=MTd2MWN5aTVmODM1bA==" target="_blank" aria-label="Instagram">
+            <Image src="/insta.png" alt="Instagram" width={40} height={40} />
           </Link>
-          <Link href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-            <Image src="/tiktok.png" alt="Instagram" width={40} height={40} />
+          <Link href="https://www.tiktok.com/@scenium._?_t=ZN-8w6AEadG0fu&_r=1" target="_blank" aria-label="Tiktok">
+            <Image src="/tiktok.png" alt="Tiktok" width={40} height={40} />
           </Link>
-          <Link href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+          <Link href="https://www.linkedin.com/company/sceniumevent/" target="_blank" aria-label="LinkedIn">
             <Image src="/linkedin.png" alt="LinkedIn" width={40} height={40} />
           </Link>
         </div>
