@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react"; // Retire useState
+import { useEffect, useRef, useCallback } from "react";
 import { ReactSVG } from "react-svg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,11 +8,13 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { RiArrowDownDoubleFill } from "react-icons/ri";
 import Button from "@/components/common/Button";
 import { useDevice } from "@/contexts/DeviceProvider";
+import { useRouter } from "next/navigation";
 
 export default function Scene() {
   gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
   const { isMobile, isTablet, isDesktop, windowSize } = useDevice();
+  const router = useRouter();
   
   const sceneRef = useRef<HTMLDivElement>(null);
   const svgContainerRef = useRef<HTMLDivElement>(null);
@@ -222,7 +224,7 @@ export default function Scene() {
         <div className={`absolute w-full flex ${
           isMobile ? 'p-4 bottom-20 justify-center' : isTablet ? 'p-8 bottom-8' : 'justify-end p-12 bottom-20 right-40'
         }`}>
-          <Button size="large" className="scene-button">
+          <Button size="large" className="scene-button" onClick={() => router.push('/reserver')}>
             Réserver
           </Button>
         </div>
