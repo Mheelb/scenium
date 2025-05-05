@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import Button from "@/components/common/Button";
 
 export default function Header() {
     const router = useRouter();
@@ -46,16 +47,25 @@ export default function Header() {
                 
                 {/* Menu desktop */}
                 {!isMobile && (
-                    <nav className="ml-10">
-                        <ul className="flex space-x-10">
-                            <li>
-                                <a href="/scenes">Nos scènes</a>
-                            </li>
-                            <li>
-                                <a onClick={() => router.push('/about')}>À propos</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <div className="flex items-center justify-between w-full">
+                        <nav className="ml-10">
+                            <ul className="flex space-x-10">
+                                <li>
+                                    <a onClick={() => router.push('/about')}>Nos scènes</a>
+                                </li>
+                                <li>
+                                    <a onClick={() => router.push('/about')}>À propos</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <Button 
+                            size="medium" 
+                            onClick={() => router.push('/reserver')}
+                            className="mr-5"
+                        >
+                            Contactes-nous
+                        </Button>
+                    </div>
                 )}
                 
                 {/* Bouton de menu mobile */}
@@ -86,6 +96,17 @@ export default function Header() {
                                     className="text-xl"
                                 >
                                     Nos scènes
+                                </a>
+                            </li>
+                            <li>
+                                <a 
+                                    onClick={() => {
+                                        router.push('/reserver');
+                                        toggleMenu();
+                                    }}
+                                    className="text-xl"
+                                >
+                                    Réserver
                                 </a>
                             </li>
                             <li>

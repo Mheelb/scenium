@@ -35,6 +35,7 @@ header ul li a {
     position: relative;
     padding-bottom: 2px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 header ul li a::after {
