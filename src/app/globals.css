@@ -1,4 +1,9 @@
 @import "tailwindcss";
+@import "../styles/layouts.css";
+@import "../styles/scene.css";
+@import "../styles//common.css";
+@import "../styles/accueil.css";
+@import "../styles/about.css";
 
 :root {
   --background: #ffffff;
@@ -22,5 +27,32 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: "Noto sans", sans-serif;
+
+  font-size: 16px;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1.main-title {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 24px;
+  font-family: "Degular";
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+span{
+  font-weight: bold;
+}
+
+footer{
+  background: var(--background);
 }

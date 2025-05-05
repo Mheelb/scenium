@@ -1,0 +1,181 @@
+.image-gradient {
+    position: relative;
+}
+  
+.image-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33.33%;
+    height: 100%;
+    background: rgb(255, 0, 0);
+}
+
+@media (max-width: 1650px) {
+    .card > h2{
+        font-size: 17px;
+    }
+    .card > p{
+        font-size: 14px;
+    }
+    .card {
+        width: 250px;
+    }
+    .newsletter{
+        padding-inline: 200px;
+    }
+}
+@media (max-width: 1450px) {
+    .container-card {
+        padding-inline: 150px;
+    }
+    .newsletter{
+        margin-inline: 150px;
+    }
+    .container-box{
+        padding-inline: 150px;
+    }
+}
+@media (max-width: 1300px) {
+    .container-card {
+        padding-inline: 100px;
+        flex-wrap: wrap;
+    justify-content: center;
+    }
+    .newsletter{
+        margin-inline: 100px;
+    }
+    .container-box{
+        padding-inline: 100px;
+    }
+}
+@media (max-width: 1200px) {
+    .container-card {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        gap: 20px;
+    }
+    .newsletter {
+        padding-inline: 80px;
+    }
+    footer{
+        padding-inline: 80px;
+    }
+}
+@media (max-width: 900px) {
+    .title > p {
+        font-size: 30px;
+    }
+    .title > img:first-child {
+        width: 25px;
+    }
+    .title > img:last-child {
+        width: 35px;
+    }
+    .newsletter > h2 {
+        font-size: 20px;
+    }
+    .newsletter > p {
+        font-size: 14px;
+    }
+    .newsletter > div {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    footer > div{
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+    footer > div > div:first-child{
+        margin: auto;
+    }
+    .text-card > p{
+        max-width: clamp(60ch, 80%, 90ch);
+    }
+    .newsletter > div > input{
+        margin: 0;
+    }
+}
+@media (max-width: 750px) {
+    .newsletter {
+        padding-inline: 30px;
+    }
+    h1{
+        font-size: 20px;
+    }
+    .title > p {
+        font-size: 23px;
+    }
+    .title > img:last-child {
+        width: 28px;
+    }
+    .title > img:first-child {
+        width: 19px;
+    }
+}
+@media (max-width: 600px) {
+    .clamp{
+        max-width: clamp(40ch, 70%, 50ch) !important;
+        text-align: justify;
+    }
+    .card{
+        width: clamp(40ch, 70%, 50ch) !important;
+    }
+}
+@media (max-width: 570px) {
+    button{
+        width: auto;
+    }
+    .clamp{
+        max-width: 85% !important;
+    }
+    .container-card{
+        padding: 0;
+    }
+    .card{
+        width: 85% !important;
+    }
+    .newsletter{
+        margin-inline: auto;
+        width: 85%;
+    }
+    .container-box{
+        padding-inline: 0;
+        margin: auto;
+        width: 80%;
+    }
+}
+@media (max-width: 450px) {
+    .title > p {
+        font-size: 19px;
+    }
+    .title > img:last-child {
+        width: 23px;
+    }
+    .title > img:first-child {
+        width: 15px;
+    }
+    footer {
+        padding-inline: 0px;
+    }
+}
+@media (max-width: 350px) {
+    .title > p {
+        font-size: 14px;
+    }
+    .title > img:last-child {
+        width: 21px;
+    }
+    .title > img:first-child {
+        width: 12px;
+    }
+    p{
+        font-size: 12px;
+    }
+    button{
+        font-size: 14px;
+    }
+}
