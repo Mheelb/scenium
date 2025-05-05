@@ -10,7 +10,6 @@ header {
     color: var(--foreground);
     z-index: 10;
     width: 100%;
-    font-family: "Degular", sans-serif;
 }
 
 header::before {
@@ -31,14 +30,14 @@ header .logo {
     cursor: pointer;
 }
 
-header ul li a {
+header div ul li a {
     position: relative;
     padding-bottom: 2px;
     text-decoration: none;
     cursor: pointer;
 }
 
-header ul li a::after {
+header div ul li a::after {
     content: '';
     position: absolute;
     width: 0;
