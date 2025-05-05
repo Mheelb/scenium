@@ -106,7 +106,7 @@ export default function Header() {
                                     }}
                                     className="text-xl"
                                 >
-                                    Réserver
+                                    Contactes-nous
                                 </a>
                             </li>
                             <li>
