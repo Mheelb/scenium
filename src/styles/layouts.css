@@ -50,7 +50,7 @@ header ul li a::after {
     transition: width 0.3s ease;
 }
 
-footer ul li a:hover::after {
+header ul li a:hover::after {
     width: 100%;
 }
 
