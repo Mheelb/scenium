@@ -108,7 +108,7 @@ export default function Header() {
                                     }}
                                     className="text-xl"
                                 >
-                                    Contactes-nous
+                                    Contactez-nous
                                 </a>
                             </li>
                             <li>
