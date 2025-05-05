@@ -5,8 +5,10 @@ import Cadre from "@/components/common/Cadre";
 import Newsletter from "@/components/common/Newsletter";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const images = [
     "/box1.png",
     "/box2.png",
@@ -43,7 +45,7 @@ export default function Home() {
         </div>
         <p className="max-w-[clamp(60ch,80%,90ch)] mx-auto text-center px-4 my-[40px] text-[16px] clamp" >Des scènes immersives et mobiles pour des événements inoubliables. Mariages, anniversaires, soirées profesionnels – installez, capturez, marquez les esprits. Design unique, impact garanti.</p>
         { width >= 750 ? (
-          <Button size="large">
+          <Button size="large" onClick={() => router.push('/scenes')}>
           Découvrir nos scènes
         </Button>
         ) : (
@@ -68,7 +70,7 @@ export default function Home() {
         </div>
         <p className="max-w-[clamp(60ch,80%,90ch)] mx-auto text-center px-4 my-[40px] text-[16px] clamp" >Des scènes <span>immersives</span> et <span>mobiles</span> pour des événements <span>inoubliables.</span> Mariages, anniversaires, soirées profesionnels – <span>installez, capturez, marquez les esprits.</span> Design unique, impact garanti.</p>
         { width >= 750 ? (
-          <Button size="large">
+          <Button size="large" onClick={() => router.push('/reserver')}>
           Nous contacter
         </Button>
         ) : (
